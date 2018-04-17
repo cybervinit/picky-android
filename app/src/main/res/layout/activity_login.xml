@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.picky.picky.login.LoginActivity"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    >
+
+    <!-- TODO: Design! -->
+
+    <EditText
+        android:id="@+id/usernameEt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_centerVertical="true"
+        />
+
+    <EditText
+        android:id="@+id/passwordEt"
+        android:inputType="textPassword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/usernameEt"
+        />
+
+    <mehdi.sakout.fancybuttons.FancyButton
+        android:id="@+id/loginBtn"
+        fancy:fb_text="@string/login_string"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_below="@id/passwordEt"
+        android:layout_centerHorizontal="true"/>
+
+
+
+</RelativeLayout>
