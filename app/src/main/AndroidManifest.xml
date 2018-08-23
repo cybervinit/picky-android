@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.picky.picky">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,8 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:theme="@style/SplashTheme"
-            android:name=".splash.SplashActivity">
+            android:name=".splash.SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -19,6 +22,13 @@
             </intent-filter>
         </activity>
         <activity android:name=".login.LoginActivity" />
+        <activity android:name=".signup.SignupActivity" />
+        <activity android:name=".PhoneVerification.PhoneVerificationActivity">
+            <intent-filter>
+                <action android:name="com.example.picky.picky.action.VERIFY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

@@ -1,11 +1,13 @@
 package com.example.picky.picky.login
 
+import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.picky.picky.R
 import com.example.picky.picky.login.`interface`.ILoginPresenter
 import com.example.picky.picky.login.`interface`.ILoginView
+import com.example.picky.picky.signup.SignupActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), ILoginView {
@@ -23,6 +25,10 @@ class LoginActivity : AppCompatActivity(), ILoginView {
 
         loginBtn.setOnClickListener {
             loginPresenter.loginWith(usernameEt.text.toString(), usernameEt.text.toString())
+        }
+
+        signUpBtn.setOnClickListener {
+            startActivity(Intent(this, SignupActivity::class.java))
         }
     }
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <EditText
+        android:id="@+id/newUsernameEt"
+        android:hint="@string/new_username"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="100dp"/>
+
+    <EditText
+        android:id="@+id/newPasswordEt"
+        android:hint="@string/new_password"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:inputType="textPassword"
+        android:layout_below="@id/newUsernameEt"
+        />
+
+    <EditText
+        android:id="@+id/newPhoneEt"
+        android:hint="@string/phone_number"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+
+        android:inputType="phone"
+        android:layout_below="@id/newPasswordEt"/>
+
+    <Button
+        android:id="@+id/sendVerificationCodeBtn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/send_verification_code"
+
+        android:layout_below="@id/newPhoneEt"/>
+
+
+
+
+</RelativeLayout>
