@@ -16,12 +16,16 @@ class SignupActivity : AppCompatActivity(), ISignupView {
     val ACTION_VERIFY: String = "com.example.picky.picky.action.VERIFY"
     val PHONE_NUMBER_KEY: String = "phone_number"
     val PHONE_NUMBER_IS_VERIFIED_KEY: String = "phone_number_verified"
+    private val NEW_USERNAME_KEY = "new_username"
+    private val NEW_PASSWORD_KEY = "new_password"
 
-    var signupPresenter: ISignupPresenter.forView = SignupPresenter(this, this)
+    lateinit var signupPresenter: ISignupPresenter.forView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
+
+        signupPresenter = SignupPresenter(this, applicationContext)
 
         sendVerificationCodeBtn.setOnClickListener {
             signupPresenter.checkNewCredentials(
@@ -32,18 +36,17 @@ class SignupActivity : AppCompatActivity(), ISignupView {
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
         super.onActivityResult(requestCode, resultCode, data)
         if (requestCode == VERIFY_REQUEST_CODE) {
             if (resultCode == Activity.RESULT_OK) {
-                Toast.makeText(this, data?.getBooleanExtra(PHONE_NUMBER_IS_VERIFIED_KEY, false).toString(), Toast.LENGTH_SHORT).show()
-                // TODO: check if the phone number is verified...
-                // TODO: if verified, attempt user signup and set a boolean that the phone number is
-                // verified so don't have to keep verifying if they can't automatically signup after
-                // phone verify
-                signupPresenter.registerUser()
+                val isVerified: Boolean = data.getBooleanExtra(PHONE_NUMBER_IS_VERIFIED_KEY, false)
+                Toast.makeText(this, "Did user verify: " + isVerified.toString(), Toast.LENGTH_SHORT).show() // FIXME: remove Toast?
+                if (isVerified) {
+                    signupPresenter.registerUser()
+                }
             } else if (resultCode == Activity.RESULT_CANCELED) {
-                Toast.makeText(this, "It's didn't work :(", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "couldn't verify", Toast.LENGTH_SHORT).show()
             }
         }
     }
@@ -61,4 +64,25 @@ class SignupActivity : AppCompatActivity(), ISignupView {
     override fun onUserCreateAttempt(responseMessage: String) {
         Toast.makeText(this, responseMessage, Toast.LENGTH_SHORT).show()
     }
+
+    override fun onRegistrationFailed(message: String) {
+        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
+        setResult(Activity.RESULT_CANCELED)
+        finish()
+    }
+
+    override fun onRegistrationSuccessful(username: String, password: String) {
+        val resultIntent: Intent = Intent()
+        resultIntent.putExtra(NEW_USERNAME_KEY, username)
+        resultIntent.putExtra(NEW_PASSWORD_KEY, password)
+        setResult(Activity.RESULT_OK, resultIntent)
+        finish()
+    }
+
+    override fun onBackPressed() {
+        setResult(Activity.RESULT_CANCELED)
+        super.onBackPressed()
+        finish()
+    }
+
 }

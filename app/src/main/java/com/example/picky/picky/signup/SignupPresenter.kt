@@ -8,6 +8,7 @@ import com.android.volley.Response
 import com.android.volley.Response.Listener
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.picky.picky.signup.`interface`.ISignupModel
 import com.example.picky.picky.signup.`interface`.ISignupPresenter
 import com.example.picky.picky.signup.`interface`.ISignupView
 
@@ -20,8 +21,10 @@ class SignupPresenter (
 ) : ISignupPresenter.forView, ISignupPresenter.forModel {
 
     val OK: String = "ok"
+    val SUCCESS_STRING: String = "success"
+
     private var signupView: ISignupView = signupView
-    private var context: Context = context
+    private var signupModel: ISignupModel = SignupModel(this, context)
     private var username: String = ""
     private var password: String = ""
     private var phoneNumber: String = ""
@@ -68,7 +71,10 @@ class SignupPresenter (
     override fun registerUser() {
         // TODO: hash the password
         val passwordHash: String = password
+
         // TODO: make the user
+        signupModel.registerUser(username, passwordHash, phoneNumber)
+        /*
         val queue: RequestQueue = Volley.newRequestQueue(context)
         val url: String = "https://pickystaging.herokuapp.com/users/registerUser"
         Log.d("VINIT", "About to initiate request")
@@ -94,6 +100,15 @@ class SignupPresenter (
             }
         }
         queue.add(signupRequest)
-
+        */
     }
+
+    override fun onUserRegisterUpdate(message: String) {
+        if (message == SUCCESS_STRING) {
+            signupView.onRegistrationSuccessful(username, password)
+            return
+        }
+        signupView.onRegistrationFailed(message)
+    }
+
 }

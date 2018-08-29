@@ -9,4 +9,7 @@ interface ISignupView {
     // FIXME: Below method to be deleted
     fun onUserCreateAttempt(responseMessage: String)
 
+    fun onRegistrationSuccessful(username: String, password: String)
+    fun onRegistrationFailed(message: String)
+
 }

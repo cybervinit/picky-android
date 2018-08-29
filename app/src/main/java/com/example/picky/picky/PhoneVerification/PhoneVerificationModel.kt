@@ -3,11 +3,6 @@ package com.example.picky.picky.PhoneVerification
 import android.content.Context
 import android.net.Uri
 import android.util.Log
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonObjectRequest
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
 import com.example.picky.picky.PhoneVerification.`interface`.IPhoneVerificationModel
 import com.example.picky.picky.PhoneVerification.`interface`.IPhoneVerificationPresenter
 import org.json.JSONObject
@@ -24,28 +19,28 @@ class PhoneVerificationModel(
     private var context: Context = c
 
     override fun requestPhoneVerification(phoneNumber: String, countryCode: String, via: String) {
-        val queue = Volley.newRequestQueue(context)
+//        val queue = Volley.newRequestQueue(context)
         var params: JSONObject = JSONObject()
         params.put("phoneNumber", phoneNumber)
         params.put("countryCode", countryCode)
         params.put("via", via)
 
-        val req: JsonObjectRequest = JsonObjectRequest(Request.Method.POST, "https://pickystaging.herokuapp.com/users/requestPhoneVerification", params,
-                Response.Listener { resp ->
-                    if (!resp.getBoolean("success")) {
-                        // TODO: remove this log
-                        // TODO: request failed dialog for the user?
-                        Log.d("VINIT", resp.getString("message"))
-                    }
-                }, Response.ErrorListener { err ->
-                    // TODO: request failed dialog for the user?
-                    Log.d("VINIT", err.message)
-        })
-        queue.add(req)
+//        val req: JsonObjectRequest = JsonObjectRequest(Request.Method.POST, "https://pickystaging.herokuapp.com/users/requestPhoneVerification", params,
+//                Response.Listener { resp ->
+//                    if (!resp.getBoolean("success")) {
+//                        // TODO: remove this log
+//                        // TODO: request failed dialog for the user?
+//                        Log.d("VINIT", resp.getString("message"))
+//                    }
+//                }, Response.ErrorListener { err ->
+//                    // TODO: request failed dialog for the user?
+//                    Log.d("VINIT", err.message)
+//        })
+//        queue.add(req)
     }
 
     override fun verifyToken(token: String, countryCode: String, phoneNumber: String) {
-        val queue = Volley.newRequestQueue(context)
+//        val queue = Volley.newRequestQueue(context)
         val uriBuilder: Uri.Builder = Uri.Builder()
         uriBuilder.scheme("https")
                 .authority("pickystaging.herokuapp.com")
@@ -56,20 +51,23 @@ class PhoneVerificationModel(
                 .appendQueryParameter("phoneNumber", phoneNumber)
         val url: String = uriBuilder.build().toString()
 
-        val req: JsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
-                Response.Listener { resp ->
-                    val isVerified = resp.getBoolean("success")
-                    if (!isVerified) {
-                        // TODO: remove this log
-                        Log.d("VINIT", resp.getString("message"))
-                    }
-                    pvPresenter.onPhoneVerifyStatusUpdated(isVerified)
-                }, Response.ErrorListener { err ->
 
-                    Log.d("VINIT", err.toString())
-                    pvPresenter.onPhoneVerifyStatusUpdated(false)
-        })
-        queue.add(req)
+        // FIXME: impl the network request to verify phone
+        pvPresenter.onPhoneVerifyStatusUpdated(true)
+//        val req: JsonObjectRequest = JsonObjectRequest(Request.Method.GET, url, null,
+//                Response.Listener { resp ->
+//                    val isVerified = resp.getBoolean("success")
+//                    if (!isVerified) {
+//                        // TODO: remove this log
+//                        Log.d("VINIT", resp.getString("message"))
+//                    }
+//                    pvPresenter.onPhoneVerifyStatusUpdated(isVerified)
+//                }, Response.ErrorListener { err ->
+//
+//                    Log.d("VINIT", err.toString())
+//                    pvPresenter.onPhoneVerifyStatusUpdated(false)
+//        })
+//        queue.add(req)
     }
 
 }

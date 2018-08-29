@@ -45,7 +45,7 @@ class PhoneVerificationActivity : AppCompatActivity(), IPhoneVerificationView {
         var result: Intent = Intent()
 
         result.putExtra(PHONE_NUMBER_IS_VERIFIED_KEY, isVerified) // FIXME: Maybe it shouldn't just be a boolean "true"
-        setResult(Activity.RESULT_OK, result);
+        setResult(Activity.RESULT_OK, result)
         finish()
     }
 }

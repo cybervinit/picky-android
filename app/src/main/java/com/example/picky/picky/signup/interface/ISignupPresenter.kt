@@ -13,6 +13,7 @@ interface ISignupPresenter {
 
     interface forModel {
         // TODO: add model methods
+        fun onUserRegisterUpdate(message: String)
     }
 
 }
