@@ -1,18 +1,23 @@
 package com.example.picky.picky.login
 
-import com.example.picky.picky.login.`interface`.ILoginModel
-import com.example.picky.picky.login.`interface`.ILoginPresenter
-import com.example.picky.picky.login.`interface`.ILoginView
+import android.content.Context
+import android.util.Log
+import com.example.picky.picky.login.interfacing.ILoginModel
+import com.example.picky.picky.login.interfacing.ILoginPresenter
+import com.example.picky.picky.login.interfacing.ILoginView
+import javax.inject.Inject
 
 /**
  *
  */
-class LoginPresenter(
-        loginView: ILoginView
+class LoginPresenter @Inject constructor(
+        loginView: ILoginView,
+        context: Context
 ) : ILoginPresenter.forModel, ILoginPresenter.forView {
 
     private var loginView: ILoginView = loginView
     private var loginModel: ILoginModel = LoginModel(this)
+    private var context: Context = context
 
     override fun loginWith(username: String, password: String) {
         this.loginModel.loginWith(username, password)
@@ -20,7 +25,7 @@ class LoginPresenter(
     }
 
     override fun loginResult(status: String, username: String) {
-        this.loginView.loginResult(status, username)
+         this.loginView.loginResult(status, username)
         // TODO: function invoked from the model
     }
 

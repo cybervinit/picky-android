@@ -1,15 +1,21 @@
 package com.example.picky.picky.login
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import com.example.picky.picky.R
-import com.example.picky.picky.login.`interface`.ILoginPresenter
-import com.example.picky.picky.login.`interface`.ILoginView
+import com.example.picky.picky.login.dagger.ContextComponent
+import com.example.picky.picky.login.dagger.ContextModule
+import com.example.picky.picky.login.dagger.DaggerContextComponent
+import com.example.picky.picky.login.interfacing.ILoginPresenter
+import com.example.picky.picky.login.interfacing.ILoginView
 import com.example.picky.picky.signup.SignupActivity
 import kotlinx.android.synthetic.main.activity_login.*
+import javax.inject.Inject
 
 class LoginActivity : AppCompatActivity(), ILoginView {
 
@@ -18,7 +24,13 @@ class LoginActivity : AppCompatActivity(), ILoginView {
     private val NEW_USERNAME_KEY = "new_username"
     private val NEW_PASSWORD_KEY = "new_password"
 
-    var loginPresenter: ILoginPresenter.forView = LoginPresenter(this)
+    @Inject lateinit var loginPresenter: ILoginPresenter.forView
+
+    private lateinit var context: Context
+
+
+
+
 
     override fun loginResult(status: String, username: String) {
         Toast.makeText(this, status + ": " + username, Toast.LENGTH_SHORT).show()
@@ -32,6 +44,12 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         loginBtn.setOnClickListener {
             login()
         }
+
+        var component: ContextComponent = DaggerContextComponent.builder().contextModule(ContextModule(this)).build()
+        component.injectLoginActivity(this)
+
+        context = this
+
 
         signUpBtn.setOnClickListener {
             startActivityForResult(Intent(this, SignupActivity::class.java), NEW_USER_REQUEST_CODE)
@@ -54,6 +72,12 @@ class LoginActivity : AppCompatActivity(), ILoginView {
 
     private fun login() {
         loginPresenter.loginWith(usernameEt.text.toString(), usernameEt.text.toString())
+    }
+
+    companion object {
+        fun getContext(loginActivity: LoginActivity): Context {
+            return loginActivity
+        }
     }
 
 }

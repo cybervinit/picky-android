@@ -1,9 +1,9 @@
 package com.example.picky.picky.PhoneVerification
 
 import android.content.Context
-import com.example.picky.picky.PhoneVerification.`interface`.IPhoneVerificationModel
-import com.example.picky.picky.PhoneVerification.`interface`.IPhoneVerificationPresenter
-import com.example.picky.picky.PhoneVerification.`interface`.IPhoneVerificationView
+import com.example.picky.picky.PhoneVerification.interfacing.IPhoneVerificationModel
+import com.example.picky.picky.PhoneVerification.interfacing.IPhoneVerificationPresenter
+import com.example.picky.picky.PhoneVerification.interfacing.IPhoneVerificationView
 
 class PhoneVerificationPresenter(
         phoneVerificationView: IPhoneVerificationView,

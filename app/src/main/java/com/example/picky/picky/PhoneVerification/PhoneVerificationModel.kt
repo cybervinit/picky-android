@@ -2,9 +2,8 @@ package com.example.picky.picky.PhoneVerification
 
 import android.content.Context
 import android.net.Uri
-import android.util.Log
-import com.example.picky.picky.PhoneVerification.`interface`.IPhoneVerificationModel
-import com.example.picky.picky.PhoneVerification.`interface`.IPhoneVerificationPresenter
+import com.example.picky.picky.PhoneVerification.interfacing.IPhoneVerificationModel
+import com.example.picky.picky.PhoneVerification.interfacing.IPhoneVerificationPresenter
 import org.json.JSONObject
 
 /**

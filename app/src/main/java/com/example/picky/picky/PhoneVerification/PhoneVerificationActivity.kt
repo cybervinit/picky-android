@@ -4,8 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import com.example.picky.picky.PhoneVerification.`interface`.IPhoneVerificationPresenter
-import com.example.picky.picky.PhoneVerification.`interface`.IPhoneVerificationView
+import com.example.picky.picky.PhoneVerification.interfacing.IPhoneVerificationPresenter
+import com.example.picky.picky.PhoneVerification.interfacing.IPhoneVerificationView
 import com.example.picky.picky.R
 import kotlinx.android.synthetic.main.activity_phone_verification.*
 

@@ -1,7 +1,7 @@
 package com.example.picky.picky.login
 
-import com.example.picky.picky.login.`interface`.ILoginModel
-import com.example.picky.picky.login.`interface`.ILoginPresenter
+import com.example.picky.picky.login.interfacing.ILoginModel
+import com.example.picky.picky.login.interfacing.ILoginPresenter
 
 /**
  * Created by vinitsoni on 2018-04-15.

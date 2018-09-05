@@ -1,10 +1,8 @@
 package com.example.picky.picky.signup
 
 import android.content.Context
-import android.util.Log
-import com.example.picky.picky.signup.`interface`.ISignupModel
-import com.example.picky.picky.signup.`interface`.ISignupPresenter
-import com.google.gson.JsonObject
+import com.example.picky.picky.signup.interfacing.ISignupModel
+import com.example.picky.picky.signup.interfacing.ISignupPresenter
 import okhttp3.*
 import org.json.JSONObject
 import java.io.IOException

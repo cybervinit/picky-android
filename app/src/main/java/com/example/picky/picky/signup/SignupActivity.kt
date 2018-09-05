@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.example.picky.picky.R
-import com.example.picky.picky.signup.`interface`.ISignupPresenter
-import com.example.picky.picky.signup.`interface`.ISignupView
+import com.example.picky.picky.signup.interfacing.ISignupPresenter
+import com.example.picky.picky.signup.interfacing.ISignupView
 import kotlinx.android.synthetic.main.activity_signup.*
 
 class SignupActivity : AppCompatActivity(), ISignupView {

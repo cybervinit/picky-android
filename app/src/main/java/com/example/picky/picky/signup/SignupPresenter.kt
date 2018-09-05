@@ -1,16 +1,9 @@
 package com.example.picky.picky.signup
 
 import android.content.Context
-import android.util.Log
-import com.android.volley.Request
-import com.android.volley.RequestQueue
-import com.android.volley.Response
-import com.android.volley.Response.Listener
-import com.android.volley.toolbox.StringRequest
-import com.android.volley.toolbox.Volley
-import com.example.picky.picky.signup.`interface`.ISignupModel
-import com.example.picky.picky.signup.`interface`.ISignupPresenter
-import com.example.picky.picky.signup.`interface`.ISignupView
+import com.example.picky.picky.signup.interfacing.ISignupModel
+import com.example.picky.picky.signup.interfacing.ISignupPresenter
+import com.example.picky.picky.signup.interfacing.ISignupView
 
 /**
  * Created by vinitsoni on 2018-05-26.
