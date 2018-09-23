@@ -7,6 +7,7 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.picky.picky.PickyApplication
 import com.example.picky.picky.R
 import com.example.picky.picky.login.dagger.ContextComponent
 import com.example.picky.picky.login.dagger.ContextModule
@@ -45,7 +46,8 @@ class LoginActivity : AppCompatActivity(), ILoginView {
             login()
         }
 
-        var component: ContextComponent = DaggerContextComponent.builder().contextModule(ContextModule(this)).build()
+        var component: ContextComponent = DaggerContextComponent.builder().contextModule(ContextModule(this,
+                (application as PickyApplication).getHttpClient())).build()
         component.injectLoginActivity(this)
 
         context = this

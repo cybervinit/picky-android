@@ -14,9 +14,11 @@ import javax.inject.Singleton
 class ContextModule {
 
     private lateinit var loginActivity: LoginActivity
+    private lateinit var httpClient: OkHttpClient
 
-    constructor(loginActivity: LoginActivity) {
+    constructor(loginActivity: LoginActivity, httpClient: OkHttpClient) {
         this.loginActivity = loginActivity
+        this.httpClient = httpClient
     }
 
 
@@ -34,5 +36,11 @@ class ContextModule {
     fun providesContext(): Context {
         return loginActivity.applicationContext
     }
+
+    @Provides
+    fun providesOkHttpClient(): OkHttpClient {
+        return httpClient
+    }
+
 
 }

@@ -2,9 +2,11 @@ package com.example.picky.picky.login
 
 import android.content.Context
 import android.util.Log
+import com.example.picky.picky.login.dagger.ContextComponent
 import com.example.picky.picky.login.interfacing.ILoginModel
 import com.example.picky.picky.login.interfacing.ILoginPresenter
 import com.example.picky.picky.login.interfacing.ILoginView
+import okhttp3.OkHttpClient
 import javax.inject.Inject
 
 /**
@@ -12,7 +14,8 @@ import javax.inject.Inject
  */
 class LoginPresenter @Inject constructor(
         loginView: ILoginView,
-        context: Context
+        context: Context,
+        httpClient: OkHttpClient // TODO: HERE HERE HERE (i.e. what to do once we have the httpClient?)
 ) : ILoginPresenter.forModel, ILoginPresenter.forView {
 
     private var loginView: ILoginView = loginView
