@@ -3,7 +3,7 @@
 
     <item android:drawable="@color/colorPrimary" />
     <item>
-        <bitmap android:src="@drawable/picky_logo"
+        <bitmap android:src="@drawable/picky_splash_ic"
             android:gravity="center"/>
     </item>
 </layer-list>
