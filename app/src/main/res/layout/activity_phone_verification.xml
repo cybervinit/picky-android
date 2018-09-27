@@ -1,27 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent" android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@color/colorPrimaryLight"
+    >
+
+    <android.support.constraint.Guideline
+        android:id="@+id/startGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.2"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/endGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.8"/>
+
+    <android.support.constraint.Guideline
+        android:id="@+id/platformGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.55"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="300dp"
+        android:gravity="center"
+        android:layout_marginBottom="40dp"
+        android:text="Enter verification code sent to **69 via SMS"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@id/verificationCodeEt"
+        app:layout_constraintEnd_toStartOf="@id/endGuideline"
+        app:layout_constraintStart_toEndOf="@id/startGuideline" />
 
     <EditText
         android:id="@+id/verificationCodeEt"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
+        android:inputType="number"
+        android:digits="0123456789"
+        android:maxLength="4"
         android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:hint="verification code"/>
+        android:layout_marginBottom="40dp"
+        android:gravity="center"
+        android:hint="@string/code"
+        android:maxWidth="50dp"
+        android:textSize="40sp"
+        app:layout_constraintBottom_toTopOf="@+id/verifyBtn"
+        app:layout_constraintEnd_toStartOf="@+id/endGuideline"
+        app:layout_constraintStart_toStartOf="@+id/startGuideline" />
 
-    <TextView
-        android:id="@+id/phoneNumberTv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/verificationCodeEt"
-        android:text="phone # goes here..."
-        />
 
-    <Button
+    <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/verifyBtn"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="click to verify phone..."
+        android:text="@string/resend_code"
 
-        android:layout_below="@id/phoneNumberTv"/>
-</RelativeLayout>
+        app:layout_constraintBottom_toTopOf="@id/platformGuideline"
+        app:layout_constraintEnd_toStartOf="@id/endGuideline"
+        app:layout_constraintStart_toEndOf="@id/startGuideline"
+
+        app:layout_constraintWidth_percent="0.4"
+        fancy:fb_defaultColor="@color/colorPrimaryDark"
+        fancy:fb_radius="5dp"
+        android:elevation="2sp"/>
+
+</android.support.constraint.ConstraintLayout>

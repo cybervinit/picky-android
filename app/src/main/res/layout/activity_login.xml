@@ -1,46 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+    
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:context="com.example.picky.picky.login.LoginActivity"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:fancy="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.picky.picky.login.LoginActivity"
-    xmlns:fancy="http://schemas.android.com/apk/res-auto"
-    >
+    android:background="@color/colorPrimaryLight">
 
-    <!-- TODO: Design! -->
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        fancy:layout_constraintGuide_percent="0.3" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        fancy:layout_constraintGuide_percent="0.6" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        fancy:layout_constraintGuide_percent="0.75" />
 
     <EditText
         android:id="@+id/usernameEt"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:hint="@string/username"
+        android:textColorHint="@color/colorPrimary"
+        android:backgroundTint="@color/colorWhite"
+        android:shadowColor="@color/colorWhite"
+        android:textColor="@color/colorWhite"
 
-        android:layout_centerVertical="true"
-        />
+        fancy:layout_constraintEnd_toStartOf="@+id/guideline2"
+        fancy:layout_constraintStart_toStartOf="parent"
+        fancy:layout_constraintTop_toBottomOf="@+id/guideline" />
 
     <EditText
         android:id="@+id/passwordEt"
-        android:inputType="textPassword"
-        android:layout_width="match_parent"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:hint="@string/password"
+        android:textColorHint="@color/colorPrimary"
+        android:backgroundTint="@color/colorWhite"
+        android:shadowColor="@color/colorWhite"
+        android:textColor="@color/colorWhite"
 
-        android:layout_below="@id/usernameEt"
-        />
+        android:inputType="textPassword"
+
+        fancy:layout_constraintEnd_toStartOf="@+id/guideline2"
+        fancy:layout_constraintStart_toStartOf="parent"
+        fancy:layout_constraintTop_toBottomOf="@+id/usernameEt" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/loginBtn"
         fancy:fb_text="@string/login_string"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
 
-        android:layout_below="@id/passwordEt"
-        android:layout_centerHorizontal="true"/>
+        fancy:fb_defaultColor="@color/colorPrimary"
+        fancy:fb_textColor="@color/colorWhite"
+        fancy:fb_textSize="30sp"
+        android:elevation="10dp"
 
-    <Button
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        fancy:layout_constraintBottom_toTopOf="@+id/signUpBtn"
+        fancy:layout_constraintEnd_toEndOf="parent"
+        fancy:layout_constraintStart_toStartOf="@+id/guideline2"
+        fancy:layout_constraintTop_toTopOf="parent" />
+
+    <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/signUpBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="sign up"/>
+        fancy:fb_text="@string/signup_string"
+
+        fancy:fb_defaultColor="@color/colorPrimaryDark"
+        fancy:fb_textColor="@color/colorWhite"
+        fancy:fb_textSize="30sp"
+        android:elevation="10dp"
+
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+
+        fancy:layout_constraintBottom_toBottomOf="parent"
+        fancy:layout_constraintEnd_toEndOf="parent"
+
+        fancy:layout_constraintStart_toStartOf="parent"
+        fancy:layout_constraintTop_toTopOf="@+id/guideline3"
+         />
+
+</android.support.constraint.ConstraintLayout>
 
 
 
-</RelativeLayout>
+
+
+

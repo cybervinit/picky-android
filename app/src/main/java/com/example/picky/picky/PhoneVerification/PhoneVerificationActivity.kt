@@ -22,10 +22,8 @@ class PhoneVerificationActivity : AppCompatActivity(), IPhoneVerificationView {
 
         val phoneNumber: String = intent.getStringExtra(PHONE_NUMBER_KEY)
 
-        phoneNumberTv.setText(phoneNumber)
-
         // TODO: 1. Send request to get a verification token from Twilio
-        pvPresenter.requestPhoneVerification(phoneNumber, "1", "sms") // FIXME can change to other options later...
+//         pvPresenter.requestPhoneVerification(phoneNumber, "1", "sms") // FIXME can change to other options later...
 
         // TODO: 2. Alow user to enter the token
 
@@ -36,7 +34,9 @@ class PhoneVerificationActivity : AppCompatActivity(), IPhoneVerificationView {
     }
 
     override fun onBackPressed() {
-        setResult(Activity.RESULT_CANCELED)
+        var result: Intent = Intent()
+        result.putExtra(PHONE_NUMBER_IS_VERIFIED_KEY, false)
+        setResult(Activity.RESULT_CANCELED, result)
         super.onBackPressed()
         finish()
     }

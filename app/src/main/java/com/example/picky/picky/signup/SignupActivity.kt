@@ -4,6 +4,8 @@ import android.app.Activity
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.widget.Toast
 import com.example.picky.picky.R
 import com.example.picky.picky.signup.interfacing.ISignupPresenter
@@ -27,6 +29,8 @@ class SignupActivity : AppCompatActivity(), ISignupView {
 
         signupPresenter = SignupPresenter(this, applicationContext)
 
+        // TODO: Verify username + phone, debounce username for uniqueness
+
         sendVerificationCodeBtn.setOnClickListener {
             signupPresenter.checkNewCredentials(
                     newUsernameEt.text.toString(),
@@ -34,6 +38,10 @@ class SignupActivity : AppCompatActivity(), ISignupView {
                     newPasswordEt.text.toString())
 
         }
+    }
+
+    private fun isUsernameValid(username: String): Boolean {
+        return (username.length >= 3) && (username.length <= 20)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
