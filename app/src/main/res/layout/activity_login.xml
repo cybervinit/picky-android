@@ -14,14 +14,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        fancy:layout_constraintGuide_percent="0.3" />
+        fancy:layout_constraintGuide_percent="0.35" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        fancy:layout_constraintGuide_percent="0.6" />
+        fancy:layout_constraintGuide_percent="0.7" />
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline3"
@@ -30,61 +30,69 @@
         android:orientation="horizontal"
         fancy:layout_constraintGuide_percent="0.75" />
 
+    <android.support.constraint.Guideline
+        android:id="@+id/usernameGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        fancy:layout_constraintGuide_percent="0.05" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/loginBtnGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        fancy:layout_constraintGuide_percent="0.95"
+        />
+
     <EditText
         android:id="@+id/usernameEt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="10dp"
+        android:backgroundTint="@color/colorWhite"
         android:hint="@string/username"
-        android:textColorHint="@color/colorPrimary"
-        android:backgroundTint="@color/colorWhite"
+        android:lines="1"
+        android:maxLines="1"
         android:shadowColor="@color/colorWhite"
+        android:singleLine="true"
         android:textColor="@color/colorWhite"
 
-        fancy:layout_constraintEnd_toStartOf="@+id/guideline2"
-        fancy:layout_constraintStart_toStartOf="parent"
-        fancy:layout_constraintTop_toBottomOf="@+id/guideline" />
-
-    <EditText
-        android:id="@+id/passwordEt"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="@string/password"
         android:textColorHint="@color/colorPrimary"
-        android:backgroundTint="@color/colorWhite"
-        android:shadowColor="@color/colorWhite"
-        android:textColor="@color/colorWhite"
-
-        android:inputType="textPassword"
-
+        android:textSize="45sp"
         fancy:layout_constraintEnd_toStartOf="@+id/guideline2"
-        fancy:layout_constraintStart_toStartOf="parent"
-        fancy:layout_constraintTop_toBottomOf="@+id/usernameEt" />
+        fancy:layout_constraintStart_toStartOf="@+id/usernameGuideline"
+        fancy:layout_constraintBottom_toTopOf="@+id/guideline" />
+
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/loginBtn"
-        fancy:fb_text="@string/login_string"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
 
         fancy:fb_defaultColor="@color/colorPrimary"
+        fancy:fb_focusColor="@color/colorBlack"
+        fancy:fb_radius="5dp"
+        fancy:fb_text="@string/login_string"
         fancy:fb_textColor="@color/colorWhite"
-        fancy:fb_textSize="30sp"
-        android:elevation="10dp"
+        fancy:fb_textSize="20sp"
 
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        fancy:layout_constraintBottom_toTopOf="@+id/signUpBtn"
-        fancy:layout_constraintEnd_toEndOf="parent"
-        fancy:layout_constraintStart_toStartOf="@+id/guideline2"
-        fancy:layout_constraintTop_toTopOf="parent" />
+        fancy:layout_constraintEnd_toEndOf="@id/usernameEt"
+        fancy:layout_constraintStart_toStartOf="@id/usernameEt"
+        fancy:layout_constraintTop_toBottomOf="@id/guideline" />
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/signUpBtn"
         fancy:fb_text="@string/signup_string"
 
-        fancy:fb_defaultColor="@color/colorPrimaryDark"
+        fancy:fb_defaultColor="@color/colorPrimary"
+        fancy:fb_focusColor="@color/colorBlack"
         fancy:fb_textColor="@color/colorWhite"
         fancy:fb_textSize="30sp"
-        android:elevation="10dp"
+        android:elevation="0dp"
+        android:layout_margin="5dp"
+        fancy:fb_radius="8dp"
 
         android:layout_width="0dp"
         android:layout_height="0dp"
