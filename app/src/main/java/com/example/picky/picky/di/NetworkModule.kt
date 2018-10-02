@@ -1,5 +1,6 @@
-package com.example.picky.picky
+package com.example.picky.picky.di
 
+import com.example.picky.picky.di.scopes.PickyApplicationScope
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -11,7 +12,7 @@ import javax.inject.Singleton
 class NetworkModule {
 
     @Provides
-    @Singleton
+    @PickyApplicationScope
     fun providesOkHttpClient(): OkHttpClient {
         return OkHttpClient()
     }

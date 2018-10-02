@@ -12,6 +12,8 @@ import android.util.Log
 import android.widget.Toast
 import com.example.picky.picky.PickyApplication
 import com.example.picky.picky.R
+import com.example.picky.picky.di.NetworkComponent
+import com.example.picky.picky.di.NetworkModule
 import com.example.picky.picky.login.dagger.ContextComponent
 import com.example.picky.picky.login.dagger.ContextModule
 import com.example.picky.picky.login.dagger.DaggerContextComponent
@@ -45,13 +47,14 @@ class LoginActivity : AppCompatActivity(), ILoginView {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        loginBtn.setOnClickListener {
-            login()
-        }
+        loginBtn.setOnClickListener { login() }
 
-        var component: ContextComponent = DaggerContextComponent.builder().contextModule(ContextModule(this,
-                (application as PickyApplication).getHttpClient())).build()
-        component.injectLoginActivity(this)
+        var contextComponent: ContextComponent = DaggerContextComponent
+                .builder()
+                .networkComponent((application as PickyApplication).app(this).networkComponent)
+                .contextModule(ContextModule(this))
+                .build()
+
 
         context = this
 

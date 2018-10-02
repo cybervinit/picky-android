@@ -2,6 +2,7 @@ package com.example.picky.picky.login
 
 import android.content.Context
 import android.util.Log
+import com.example.picky.picky.di.scopes.PickyApplicationScope
 import com.example.picky.picky.login.dagger.ContextComponent
 import com.example.picky.picky.login.interfacing.ILoginModel
 import com.example.picky.picky.login.interfacing.ILoginPresenter

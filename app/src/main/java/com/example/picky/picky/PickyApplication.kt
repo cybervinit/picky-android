@@ -1,7 +1,9 @@
 package com.example.picky.picky
 
 import android.app.Application
-import android.widget.Toast
+import android.content.Context
+import com.example.picky.picky.di.DaggerNetworkComponent
+import com.example.picky.picky.di.NetworkComponent
 import okhttp3.OkHttpClient
 
 class PickyApplication : Application() {
@@ -11,11 +13,18 @@ class PickyApplication : Application() {
     override fun onCreate() {
         super.onCreate()
         // TODO: instantiate component for
+
         networkComponent = DaggerNetworkComponent.builder().build()
         networkComponent.inject(this)
+
+        val client: OkHttpClient = networkComponent.getHttpClient()
     }
 
     fun getHttpClient(): OkHttpClient {
         return networkComponent.getHttpClient()
+    }
+
+    fun app(context: Context): PickyApplication {
+        return context.applicationContext as PickyApplication
     }
 }
