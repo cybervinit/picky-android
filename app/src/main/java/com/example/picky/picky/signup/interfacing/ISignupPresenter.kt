@@ -7,7 +7,8 @@ interface ISignupPresenter {
 
     interface forView {
         // TODO: add view methods
-        fun checkNewCredentials(username: String, phoneNumber: String, password: String)
+        fun checkNewUsername(newUsername: String)
+        fun checkUsernameValid(newUsername: String)
         fun registerUser()
     }
 

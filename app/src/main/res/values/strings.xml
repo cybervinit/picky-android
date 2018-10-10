@@ -4,13 +4,15 @@
     <string name="signup_string">Sign up</string>
     <string name="username">username</string>
     <string name="password">password</string>
-    <string name="plus_1">(+1)</string>
+    <string name="plus_1">+1</string>
     <string name="new_username">new username</string>
-    <string name="new_password">a good password...</string>
     <string name="send_verification_code">Send Verification Code</string>
     <string name="phone_number">phone number</string>
 
     <string name="signup_title">2 Step Signup!</string>
     <string name="resend_code">resend code</string>
     <string name="code">code</string>
+    <string name="full_name">Full name</string>
+    <string name="google_signin">Sign in with Google</string>
+    <string name="picky_logo">Picky logo</string>
 </resources>

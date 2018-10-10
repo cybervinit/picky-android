@@ -8,132 +8,86 @@
     android:background="@color/colorPrimaryLight">
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline"
+        android:id="@+id/logoGuideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55" />
+        app:layout_constraintGuide_percent="0.30"
+        />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/formEndGuideline"
+        android:id="@+id/logoGuideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.85" />
+        app:layout_constraintGuide_percent="0.60" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/formStartGuideline"
+        android:id="@+id/logoGuideline4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.40" />
+
+    <android.support.constraint.Guideline
+        android:id="@+id/newUsernameGuideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.15" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/phoneGuideline"
+        android:id="@+id/newUsernameGuideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.28" />
+        app:layout_constraintGuide_percent="0.85" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="30dp"
-        android:text="@string/signup_title"
-        android:textColor="@color/colorWhite"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/newUsernameEt"
-        app:layout_constraintEnd_toStartOf="@+id/formEndGuideline"
-        app:layout_constraintStart_toStartOf="@+id/formStartGuideline" />
+
+    <ImageView
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:src="@drawable/picky_logo_circle"
+        android:contentDescription="@string/picky_logo"
+        app:layout_constraintStart_toEndOf="@id/logoGuideline4"
+        app:layout_constraintEnd_toStartOf="@id/logoGuideline2"
+        app:layout_constraintBottom_toTopOf="@id/logoGuideline3"/>
 
     <EditText
         android:id="@+id/newUsernameEt"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/username"
-        android:inputType="textNoSuggestions"
-        android:backgroundTint="@color/colorWhite"
-        android:shadowColor="@color/colorWhite"
+        android:hint="@string/new_username"
         android:textColor="@color/colorWhite"
-        android:textColorHint="@color/colorPrimary"
-
-
-        app:layout_constraintBottom_toTopOf="@+id/newPasswordEt"
-        app:layout_constraintEnd_toStartOf="@id/formEndGuideline"
-        app:layout_constraintStart_toEndOf="@id/formStartGuideline" />
-
-    <EditText
-        android:id="@+id/newPasswordEt"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
         android:backgroundTint="@color/colorWhite"
-        android:hint="@string/new_password"
-        android:inputType="textPassword"
-        android:shadowColor="@color/colorWhite"
-        android:textColor="@color/colorWhite"
         android:textColorHint="@color/colorPrimary"
+        android:layout_marginTop="50dp"
+        app:layout_constraintStart_toEndOf="@id/newUsernameGuideline1"
+        app:layout_constraintEnd_toStartOf="@id/newUsernameGuideline2"
+        app:layout_constraintTop_toBottomOf="@id/logoGuideline3"
+        />
 
-        app:layout_constraintBottom_toTopOf="@+id/newPhoneEt"
-        app:layout_constraintEnd_toStartOf="@+id/formEndGuideline"
-        app:layout_constraintStart_toEndOf="@+id/formStartGuideline" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/plus_1"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/phoneGuideline"
-        app:layout_constraintStart_toStartOf="@+id/formStartGuideline"
-        app:layout_constraintTop_toTopOf="@+id/newPhoneEt" />
-
-    <EditText
-        android:id="@+id/newPhoneEt"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/newPasswordEt"
-        android:layout_marginBottom="8dp"
-
-        android:layout_marginStart="8dp"
-        android:backgroundTint="@color/colorWhite"
-        android:shadowColor="@color/colorWhite"
-        android:textColor="@color/colorWhite"
-        android:textColorHint="@color/colorPrimary"
-        android:hint="@string/phone_number"
-        android:inputType="phone"
-
-        app:layout_constraintBottom_toTopOf="@id/guideline2"
-        app:layout_constraintEnd_toStartOf="@id/formEndGuideline"
-        app:layout_constraintStart_toStartOf="@+id/phoneGuideline" />
 
     <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/sendVerificationCodeBtn"
-        fancy:fb_textColor="@color/colorWhite"
-        fancy:fb_defaultColor="@color/colorPrimaryDark"
-        fancy:fb_radius="5dp"
-
-        android:elevation="2dp"
-
+        android:id="@+id/newUsernameDoneBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@id/newPhoneEt"
+        android:elevation="3dp"
+        fancy:fb_defaultColor="@color/colorPrimary"
+        fancy:fb_focusColor="@color/colorBlack"
+        fancy:fb_radius="5dp"
+        fancy:fb_text="Done"
+        fancy:fb_textColor="@color/colorWhite"
+        fancy:fb_textSize="20sp"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:layout_marginTop="15dp"
+        fancy:layout_constraintTop_toBottomOf="@id/newUsernameEt"
+        app:layout_constraintStart_toEndOf="@id/newUsernameGuideline1"
+        app:layout_constraintEnd_toStartOf="@id/newUsernameGuideline2"
+        />
 
 
-        android:text="@string/send_verification_code"
-        app:layout_constraintBottom_toTopOf="@+id/guideline"
-        app:layout_constraintEnd_toStartOf="parent"
-        app:layout_constraintStart_toEndOf="parent"
-        app:layout_constraintWidth_percent="0.5" />
 
 
 </android.support.constraint.ConstraintLayout>

@@ -1,18 +1,12 @@
 package com.example.picky.picky.login
 
 import android.content.Context
-import android.util.Log
-import com.example.picky.picky.di.scopes.PickyApplicationScope
-import com.example.picky.picky.login.dagger.ContextComponent
 import com.example.picky.picky.login.interfacing.ILoginModel
 import com.example.picky.picky.login.interfacing.ILoginPresenter
 import com.example.picky.picky.login.interfacing.ILoginView
 import okhttp3.OkHttpClient
 import javax.inject.Inject
 
-/**
- *
- */
 class LoginPresenter @Inject constructor(
         loginView: ILoginView,
         context: Context,
@@ -23,8 +17,8 @@ class LoginPresenter @Inject constructor(
     private var loginModel: ILoginModel = LoginModel(this)
     private var context: Context = context
 
-    override fun loginWith(username: String, password: String) {
-        this.loginModel.loginWith(username, password)
+    override fun loginWith(username: String) {
+        this.loginModel.loginWith(username)
         // TODO: Hash the password?
     }
 

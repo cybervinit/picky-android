@@ -12,7 +12,7 @@ class LoginModel(
 
     private var loginPresenter: ILoginPresenter.forModel = loginPresenter
 
-    override fun loginWith(username: String, password: String) {
+    override fun loginWith(username: String) {
         loginPresenter.loginResult("success", username)
     }
 }

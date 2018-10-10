@@ -34,7 +34,7 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
-                                                <entry key="scalingPercent" value="50" />
+                                                <entry key="scalingPercent" value="76" />
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -45,11 +45,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundAssetType" value="COLOR" />
-                                      <entry key="backgroundColor" value="009688" />
-                                      <entry key="backgroundLayerName" value="picky_launcher_background" />
-                                      <entry key="foregroundImage" value="$USER_HOME$/Downloads/picky_logo_foreground.png" />
-                                      <entry key="foregroundLayerName" value="picky_launcher_foreground" />
-                                      <entry key="outputName" value="picky_launcher_ic" />
+                                      <entry key="backgroundColor" value="ffffff" />
+                                      <entry key="foregroundImage" value="$USER_HOME$/Downloads/picky_logo.png" />
+                                      <entry key="outputName" value="picky_icon" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -29,29 +29,29 @@
         app:layout_constraintGuide_percent="0.55"/>
 
     <TextView
+        android:text="Enter verification code sent to **69 via SMS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
         android:maxWidth="300dp"
         android:gravity="center"
         android:layout_marginBottom="40dp"
-        android:text="Enter verification code sent to **69 via SMS"
-        android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@id/verificationCodeEt"
         app:layout_constraintEnd_toStartOf="@id/endGuideline"
         app:layout_constraintStart_toEndOf="@id/startGuideline" />
 
     <EditText
         android:id="@+id/verificationCodeEt"
+        android:hint="@string/code"
         android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:inputType="number"
         android:digits="0123456789"
-        android:maxLength="4"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="40dp"
-        android:gravity="center"
-        android:hint="@string/code"
         android:maxWidth="50dp"
         android:textSize="40sp"
+        android:maxLength="4"
+        android:gravity="center"
+        android:layout_marginBottom="40dp"
         app:layout_constraintBottom_toTopOf="@+id/verifyBtn"
         app:layout_constraintEnd_toStartOf="@+id/endGuideline"
         app:layout_constraintStart_toStartOf="@+id/startGuideline" />
@@ -59,17 +59,16 @@
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/verifyBtn"
+        android:text="@string/resend_code"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/resend_code"
-
+        fancy:fb_defaultColor="@color/colorPrimaryDark"
+        fancy:fb_radius="5dp"
+        android:elevation="2sp"
         app:layout_constraintBottom_toTopOf="@id/platformGuideline"
         app:layout_constraintEnd_toStartOf="@id/endGuideline"
         app:layout_constraintStart_toEndOf="@id/startGuideline"
-
         app:layout_constraintWidth_percent="0.4"
-        fancy:fb_defaultColor="@color/colorPrimaryDark"
-        fancy:fb_radius="5dp"
-        android:elevation="2sp"/>
+        />
 
 </android.support.constraint.ConstraintLayout>

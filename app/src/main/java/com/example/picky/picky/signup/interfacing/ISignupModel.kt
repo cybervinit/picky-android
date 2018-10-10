@@ -5,5 +5,6 @@ package com.example.picky.picky.signup.interfacing
  */
 interface ISignupModel {
 
-    fun registerUser(username: String, passwordHash: String, phoneNumber: String)
+    fun registerUser(username: String)
+    fun checkUsernameValid(newUsername: String)
 }

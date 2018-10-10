@@ -14,91 +14,33 @@ class SignupPresenter (
 ) : ISignupPresenter.forView, ISignupPresenter.forModel {
 
     val OK: String = "ok"
+    val NOT_OK: String = "not ok"
     val SUCCESS_STRING: String = "success"
 
     private var signupView: ISignupView = signupView
     private var signupModel: ISignupModel = SignupModel(this, context)
+    private var context: Context = context
     private var username: String = ""
-    private var password: String = ""
-    private var phoneNumber: String = ""
 
-    override fun checkNewCredentials(newUsername: String, newPhoneNumber: String, newPassword: String) {
-        val usernameMsg: String = usernameCheckValid(newUsername)
-        val passwordMsg: String = passwordCheckValid(newPassword)
-        val phoneNumberMsg: String = phoneNumberCheckValid(newPhoneNumber)
-        if (usernameMsg.equals(OK)) {
-            if (passwordMsg.equals(OK)) {
-                if (phoneNumberMsg.equals(OK)) {
-                    this.username = newUsername
-                    this.password = newPassword
-                    this.phoneNumber = newPhoneNumber
-                    signupView.onCredentialsChecked(true, OK)
-                    return
-                }
-                signupView.onCredentialsChecked(false, phoneNumberMsg)
-                return
-            }
-            signupView.onCredentialsChecked(false, passwordMsg)
+    override fun checkNewUsername(newUsername: String) {
+        // TODO("call check new username fct")
+    }
+
+    override fun checkUsernameValid(newUsername: String) {
+        if (newUsername.length <= 20 && newUsername.length >= 3) {
+            this.signupModel.checkUsernameValid(newUsername)
             return
         }
-        signupView.onCredentialsChecked(false, usernameMsg)
-        return
-    }
-
-    private fun usernameCheckValid(username: String) : String {
-        // TODO: check if the username is valid
-        return OK
-    }
-
-    private fun passwordCheckValid(password: String) : String {
-        // TODO: check if the password is valid
-        return OK
-
-    }
-
-    private fun phoneNumberCheckValid(phoneNumber: String) : String{
-        // TODO: check if the phone number is valid
-        return OK
+        this.signupView.onUsernameChecked(false, "username must be between 3-20 characters")
     }
 
     override fun registerUser() {
-        // TODO: hash the password
-        val passwordHash: String = password
-
-        // TODO: make the user
-        signupModel.registerUser(username, passwordHash, phoneNumber)
-        /*
-        val queue: RequestQueue = Volley.newRequestQueue(context)
-        val url: String = "https://pickystaging.herokuapp.com/users/registerUser"
-        Log.d("VINIT", "About to initiate request")
-        val signupRequest: StringRequest = object : StringRequest(
-                Request.Method.POST,
-                url,
-                Listener<String>{ response ->
-                    Log.d("VINIT", response)
-                    signupView.onUserCreateAttempt(response)
-                    // TODO: store cookies... etc etc
-                },
-                Response.ErrorListener { err ->
-
-                }
-
-        ){
-            override fun getParams() : Map<String, String> {
-                var params: HashMap<String, String> = HashMap<String, String>()
-                params.put("username", username)
-                params.put("passwordHash", passwordHash)
-                params.put("phone", phoneNumber)
-                return params
-            }
-        }
-        queue.add(signupRequest)
-        */
+        signupModel.registerUser(username)
     }
 
     override fun onUserRegisterUpdate(message: String) {
         if (message == SUCCESS_STRING) {
-            signupView.onRegistrationSuccessful(username, password)
+            signupView.onRegistrationSuccessful(username)
             return
         }
         signupView.onRegistrationFailed(message)

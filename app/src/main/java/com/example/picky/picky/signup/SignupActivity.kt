@@ -1,25 +1,33 @@
 package com.example.picky.picky.signup
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
 import android.text.Editable
 import android.text.TextWatcher
+import android.widget.TextView
 import android.widget.Toast
 import com.example.picky.picky.R
 import com.example.picky.picky.signup.interfacing.ISignupPresenter
 import com.example.picky.picky.signup.interfacing.ISignupView
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_signup.*
+import java.util.*
 
 class SignupActivity : AppCompatActivity(), ISignupView {
 
+    val DEBOUNCE_DELAY: Long = 1500
     val VERIFY_REQUEST_CODE: Int = 837 // 837 = verify
     val ACTION_VERIFY: String = "com.example.picky.picky.action.VERIFY"
+    val PICKY_PERMISSION_READ_PHONE_STATE: Int = 10
     val PHONE_NUMBER_KEY: String = "phone_number"
     val PHONE_NUMBER_IS_VERIFIED_KEY: String = "phone_number_verified"
     private val NEW_USERNAME_KEY = "new_username"
-    private val NEW_PASSWORD_KEY = "new_password"
 
     lateinit var signupPresenter: ISignupPresenter.forView
 
@@ -29,19 +37,25 @@ class SignupActivity : AppCompatActivity(), ISignupView {
 
         signupPresenter = SignupPresenter(this, applicationContext)
 
-        // TODO: Verify username + phone, debounce username for uniqueness
+        // TODO: Verify username with debouncing
 
-        sendVerificationCodeBtn.setOnClickListener {
-            signupPresenter.checkNewCredentials(
-                    newUsernameEt.text.toString(),
-                    newPhoneEt.text.toString(),
-                    newPasswordEt.text.toString())
+        newUsernameEt.addTextChangedListener(object : TextWatcher {
+            private var debounceTimerNewUsernameEt: Timer = Timer()
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
-        }
-    }
+            override fun afterTextChanged(p0: Editable?) {
+                debounceTimerNewUsernameEt.cancel()
+                debounceTimerNewUsernameEt = Timer()
+                debounceTimerNewUsernameEt.schedule(object : TimerTask() {
+                    override fun run() {
+                        signupPresenter.checkNewUsername(newUsernameEt.text.toString())
+                    }
 
-    private fun isUsernameValid(username: String): Boolean {
-        return (username.length >= 3) && (username.length <= 20)
+                }, DEBOUNCE_DELAY)
+            }
+
+        })
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
@@ -59,13 +73,7 @@ class SignupActivity : AppCompatActivity(), ISignupView {
         }
     }
 
-    override fun onCredentialsChecked(isOk: Boolean, message: String) {
-        if (isOk) {
-            val verifyIntent: Intent = Intent(ACTION_VERIFY) // FIXME: can URI strings be empty?
-            verifyIntent.putExtra(PHONE_NUMBER_KEY, newPhoneEt.text.toString())
-            startActivityForResult(verifyIntent, VERIFY_REQUEST_CODE)
-            return
-        }
+    override fun onUsernameChecked(isOk: Boolean, message: String) {
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
     }
 
@@ -79,10 +87,9 @@ class SignupActivity : AppCompatActivity(), ISignupView {
         finish()
     }
 
-    override fun onRegistrationSuccessful(username: String, password: String) {
+    override fun onRegistrationSuccessful(username: String) {
         val resultIntent: Intent = Intent()
         resultIntent.putExtra(NEW_USERNAME_KEY, username)
-        resultIntent.putExtra(NEW_PASSWORD_KEY, password)
         setResult(Activity.RESULT_OK, resultIntent)
         finish()
     }
@@ -92,5 +99,4 @@ class SignupActivity : AppCompatActivity(), ISignupView {
         super.onBackPressed()
         finish()
     }
-
 }

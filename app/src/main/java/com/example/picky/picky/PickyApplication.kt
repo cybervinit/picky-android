@@ -2,8 +2,8 @@ package com.example.picky.picky
 
 import android.app.Application
 import android.content.Context
-import com.example.picky.picky.di.DaggerNetworkComponent
-import com.example.picky.picky.di.NetworkComponent
+import com.example.picky.picky.di.network.DaggerNetworkComponent
+import com.example.picky.picky.di.network.NetworkComponent
 import okhttp3.OkHttpClient
 
 class PickyApplication : Application() {

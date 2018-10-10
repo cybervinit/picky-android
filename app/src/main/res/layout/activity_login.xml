@@ -14,96 +14,43 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        fancy:layout_constraintGuide_percent="0.35" />
+        fancy:layout_constraintGuide_percent="0.55" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/btnsStartGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        fancy:layout_constraintGuide_percent="0.7" />
+        fancy:layout_constraintGuide_percent="0.1" />
 
     <android.support.constraint.Guideline
-        android:id="@+id/guideline3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        fancy:layout_constraintGuide_percent="0.75" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/usernameGuideline"
+        android:id="@+id/btnsEndGuideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        fancy:layout_constraintGuide_percent="0.05" />
-
-    <android.support.constraint.Guideline
-        android:id="@+id/loginBtnGuideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        fancy:layout_constraintGuide_percent="0.95"
-        />
-
-    <EditText
-        android:id="@+id/usernameEt"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="10dp"
-        android:backgroundTint="@color/colorWhite"
-        android:hint="@string/username"
-        android:lines="1"
-        android:maxLines="1"
-        android:shadowColor="@color/colorWhite"
-        android:singleLine="true"
-        android:textColor="@color/colorWhite"
-
-        android:textColorHint="@color/colorPrimary"
-        android:textSize="45sp"
-        fancy:layout_constraintEnd_toStartOf="@+id/guideline2"
-        fancy:layout_constraintStart_toStartOf="@+id/usernameGuideline"
-        fancy:layout_constraintBottom_toTopOf="@+id/guideline" />
+        fancy:layout_constraintGuide_percent="0.9" />
 
 
     <mehdi.sakout.fancybuttons.FancyButton
         android:id="@+id/loginBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-
-        fancy:fb_defaultColor="@color/colorPrimary"
+        android:elevation="3dp"
+        fancy:fb_defaultColor="@color/colorWhite"
         fancy:fb_focusColor="@color/colorBlack"
         fancy:fb_radius="5dp"
-        fancy:fb_text="@string/login_string"
-        fancy:fb_textColor="@color/colorWhite"
+        fancy:fb_text="@string/google_signin"
+        fancy:fb_textColor="@color/colorGrey"
         fancy:fb_textSize="20sp"
+        fancy:layout_constraintTop_toBottomOf="@id/guideline"
+        fancy:layout_constraintStart_toEndOf="@id/btnsStartGuideline"
+        fancy:layout_constraintEnd_toStartOf="@id/btnsEndGuideline"/>
 
-        fancy:layout_constraintEnd_toEndOf="@id/usernameEt"
-        fancy:layout_constraintStart_toStartOf="@id/usernameEt"
-        fancy:layout_constraintTop_toBottomOf="@id/guideline" />
-
-    <mehdi.sakout.fancybuttons.FancyButton
+    <Button
         android:id="@+id/signUpBtn"
-        fancy:fb_text="@string/signup_string"
-
-        fancy:fb_defaultColor="@color/colorPrimary"
-        fancy:fb_focusColor="@color/colorBlack"
-        fancy:fb_textColor="@color/colorWhite"
-        fancy:fb_textSize="30sp"
-        android:elevation="0dp"
-        android:layout_margin="5dp"
-        fancy:fb_radius="8dp"
-
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-
-        fancy:layout_constraintBottom_toBottomOf="parent"
-        fancy:layout_constraintEnd_toEndOf="parent"
-
-        fancy:layout_constraintStart_toStartOf="parent"
-        fancy:layout_constraintTop_toTopOf="@+id/guideline3"
-         />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sign up"/>
 
 </android.support.constraint.ConstraintLayout>
 

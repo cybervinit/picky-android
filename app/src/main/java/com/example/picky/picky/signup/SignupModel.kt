@@ -1,6 +1,7 @@
 package com.example.picky.picky.signup
 
 import android.content.Context
+import android.util.Log
 import com.example.picky.picky.signup.interfacing.ISignupModel
 import com.example.picky.picky.signup.interfacing.ISignupPresenter
 import okhttp3.*
@@ -19,11 +20,9 @@ class SignupModel (
     private var client : OkHttpClient = OkHttpClient()
 
 
-    override fun registerUser(username: String, passwordHash: String, phoneNumber: String) {
+    override fun registerUser(username: String) {
         var bodyJson: JSONObject = JSONObject()
         bodyJson.put("username", username)
-        bodyJson.put("phone", phoneNumber)
-        bodyJson.put("passwordHash", passwordHash)
         var body: RequestBody = RequestBody.create(JSON_MEDIATYPE, bodyJson.toString())
         var registerRequest: Request = Request.Builder()
                 .url("https://pickystaging.herokuapp.com/users/registerUser")
@@ -42,5 +41,25 @@ class SignupModel (
             }
 
         })
+    }
+
+    override fun checkUsernameValid(newUsername: String) {
+        var checkUsernameValidRequest: Request = Request.Builder()
+                .url("https://pickystaging.herokuapp.com/users/isUsernameValid?newUsername=${newUsername}")
+                .build()
+        client.newCall(checkUsernameValidRequest).enqueue(object : Callback {
+            override fun onFailure(call: Call, e: IOException) {
+                Log.d("VINIT", "Request failure: ${e.localizedMessage}")
+            }
+
+            override fun onResponse(call: Call, response: Response) {
+                Log.d("VINIT", "Request succeeded!")
+                val jsonString: String = response?.body()?.string() ?: ""
+                val respJson: JSONObject = JSONObject(jsonString)
+                Log.d("VINIT", respJson.getString("message"))
+            }
+
+        })
+
     }
 }

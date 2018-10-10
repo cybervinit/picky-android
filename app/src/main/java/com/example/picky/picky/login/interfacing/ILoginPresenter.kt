@@ -5,7 +5,7 @@ package com.example.picky.picky.login.interfacing
  */
 interface ILoginPresenter {
     interface forView {
-        fun loginWith(username: String, password: String)
+        fun loginWith(username: String)
     }
 
     interface forModel {
