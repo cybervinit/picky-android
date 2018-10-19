@@ -9,13 +9,11 @@ import javax.inject.Inject
 
 class LoginPresenter @Inject constructor(
         loginView: ILoginView,
-        context: Context,
-        httpClient: OkHttpClient // TODO: HERE HERE HERE (i.e. what to do once we have the httpClient?)
+        okHttpClient: OkHttpClient
 ) : ILoginPresenter.forModel, ILoginPresenter.forView {
 
     private var loginView: ILoginView = loginView
-    private var loginModel: ILoginModel = LoginModel(this)
-    private var context: Context = context
+    private var loginModel: ILoginModel = LoginModel(this, okHttpClient)
 
     override fun loginWith(username: String) {
         this.loginModel.loginWith(username)
@@ -25,6 +23,10 @@ class LoginPresenter @Inject constructor(
     override fun loginResult(status: String, username: String) {
          this.loginView.loginResult(status, username)
         // TODO: function invoked from the model
+    }
+
+    override fun authWithGoogle(idToken: String) {
+        loginModel.authWithGoogle(idToken)
     }
 
 }

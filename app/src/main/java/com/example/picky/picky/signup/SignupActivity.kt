@@ -23,9 +23,6 @@ class SignupActivity : AppCompatActivity(), ISignupView {
 
     val DEBOUNCE_DELAY: Long = 1500
     val VERIFY_REQUEST_CODE: Int = 837 // 837 = verify
-    val ACTION_VERIFY: String = "com.example.picky.picky.action.VERIFY"
-    val PICKY_PERMISSION_READ_PHONE_STATE: Int = 10
-    val PHONE_NUMBER_KEY: String = "phone_number"
     val PHONE_NUMBER_IS_VERIFIED_KEY: String = "phone_number_verified"
     private val NEW_USERNAME_KEY = "new_username"
 

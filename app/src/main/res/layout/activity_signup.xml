@@ -43,16 +43,6 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.85" />
 
-
-    <ImageView
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:src="@drawable/picky_logo_circle"
-        android:contentDescription="@string/picky_logo"
-        app:layout_constraintStart_toEndOf="@id/logoGuideline4"
-        app:layout_constraintEnd_toStartOf="@id/logoGuideline2"
-        app:layout_constraintBottom_toTopOf="@id/logoGuideline3"/>
-
     <EditText
         android:id="@+id/newUsernameEt"
         android:layout_width="0dp"

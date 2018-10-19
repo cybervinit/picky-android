@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        fancy:layout_constraintGuide_percent="0.55" />
+        fancy:layout_constraintGuide_percent="0.7" />
 
     <android.support.constraint.Guideline
         android:id="@+id/btnsStartGuideline"
@@ -30,21 +30,70 @@
         android:orientation="vertical"
         fancy:layout_constraintGuide_percent="0.9" />
 
+    <android.support.constraint.Guideline
+        android:id="@+id/logoGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        fancy:layout_constraintGuide_percent="0.5" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/picky_splash_icon"
+
+        fancy:layout_constraintBottom_toTopOf="@+id/logoGuideline"
+        fancy:layout_constraintStart_toEndOf="@id/btnsStartGuideline"
+        fancy:layout_constraintEnd_toStartOf="@id/btnsEndGuideline"/>
+
 
     <mehdi.sakout.fancybuttons.FancyButton
-        android:id="@+id/loginBtn"
-        android:layout_width="0dp"
+        android:id="@+id/googleSignInBtn"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
         android:elevation="3dp"
         fancy:fb_defaultColor="@color/colorWhite"
-        fancy:fb_focusColor="@color/colorBlack"
+        fancy:fb_focusColor="@color/colorGrey"
         fancy:fb_radius="5dp"
-        fancy:fb_text="@string/google_signin"
+        fancy:fb_text=""
+        android:contentDescription="Google logo"
         fancy:fb_textColor="@color/colorGrey"
-        fancy:fb_textSize="20sp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
+        android:paddingEnd="10dp"
+        android:gravity="left"
         fancy:layout_constraintTop_toBottomOf="@id/guideline"
         fancy:layout_constraintStart_toEndOf="@id/btnsStartGuideline"
-        fancy:layout_constraintEnd_toStartOf="@id/btnsEndGuideline"/>
+        fancy:layout_constraintEnd_toStartOf="@id/btnsEndGuideline">
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/google_logo"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="8dp"
+
+                android:src="@drawable/google_logo"
+                fancy:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/google_logo"
+                android:layout_marginStart="8dp"
+                android:layout_marginEnd="8dp"
+                android:text="@string/google_signin"
+                android:textSize="20sp"
+                fancy:layout_constraintEnd_toEndOf="parent"
+                fancy:layout_constraintStart_toEndOf="@+id/google_logo" />
+
+        </android.support.constraint.ConstraintLayout>
+
+    </mehdi.sakout.fancybuttons.FancyButton>
 
     <Button
         android:id="@+id/signUpBtn"

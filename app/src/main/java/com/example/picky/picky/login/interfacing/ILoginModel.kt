@@ -5,4 +5,5 @@ package com.example.picky.picky.login.interfacing
  */
 interface ILoginModel {
     fun loginWith(username: String)
+    fun authWithGoogle(idToken: String)
 }

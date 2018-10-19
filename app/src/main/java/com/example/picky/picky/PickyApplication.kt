@@ -2,26 +2,29 @@ package com.example.picky.picky
 
 import android.app.Application
 import android.content.Context
-import com.example.picky.picky.di.network.DaggerNetworkComponent
-import com.example.picky.picky.di.network.NetworkComponent
+import com.example.picky.picky.di.app.AppComponent
+import com.example.picky.picky.di.app.DaggerAppComponent
 import okhttp3.OkHttpClient
 
 class PickyApplication : Application() {
 
-    lateinit var networkComponent: NetworkComponent
+    private lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
         // TODO: instantiate component for
 
-        networkComponent = DaggerNetworkComponent.builder().build()
-        networkComponent.inject(this)
+        appComponent = DaggerAppComponent
+                .builder()
+                .build()
 
-        val client: OkHttpClient = networkComponent.getHttpClient()
+
+
+        val client: OkHttpClient = appComponent.exposeOkHttpClient()
     }
 
     fun getHttpClient(): OkHttpClient {
-        return networkComponent.getHttpClient()
+        return appComponent.exposeOkHttpClient()
     }
 
     fun app(context: Context): PickyApplication {

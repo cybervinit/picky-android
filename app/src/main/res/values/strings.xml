@@ -15,4 +15,6 @@
     <string name="full_name">Full name</string>
     <string name="google_signin">Sign in with Google</string>
     <string name="picky_logo">Picky logo</string>
+
+    <string name="google_oauth_client_id">409466924106-c443je9budd32ahm2a8e3n0adpq6927a.apps.googleusercontent.com</string>
 </resources>
