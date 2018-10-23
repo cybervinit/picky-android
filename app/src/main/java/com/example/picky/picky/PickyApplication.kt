@@ -3,6 +3,7 @@ package com.example.picky.picky
 import android.app.Application
 import android.content.Context
 import com.example.picky.picky.di.app.AppComponent
+import com.example.picky.picky.di.app.ContextModule
 import com.example.picky.picky.di.app.DaggerAppComponent
 import okhttp3.OkHttpClient
 
@@ -16,6 +17,7 @@ class PickyApplication : Application() {
 
         appComponent = DaggerAppComponent
                 .builder()
+                .contextModule(ContextModule(this))
                 .build()
 
 
@@ -23,8 +25,8 @@ class PickyApplication : Application() {
         val client: OkHttpClient = appComponent.exposeOkHttpClient()
     }
 
-    fun getHttpClient(): OkHttpClient {
-        return appComponent.exposeOkHttpClient()
+    fun getAppComponent(): AppComponent {
+        return appComponent
     }
 
     fun app(context: Context): PickyApplication {

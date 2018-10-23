@@ -1,40 +1,52 @@
 package com.example.picky.picky.signup
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
+import android.support.v4.view.ViewCompat
 import android.text.Editable
 import android.text.TextWatcher
-import android.widget.TextView
 import android.widget.Toast
+import com.example.picky.picky.PickyApplication
 import com.example.picky.picky.R
+import com.example.picky.picky.data.models.BaseActivity
+import com.example.picky.picky.main.MainActivity
+import com.example.picky.picky.signup.di.DaggerSignupActivityComponent
+import com.example.picky.picky.signup.di.SignupActivityComponent
+import com.example.picky.picky.signup.di.SignupActivityModule
 import com.example.picky.picky.signup.interfacing.ISignupPresenter
 import com.example.picky.picky.signup.interfacing.ISignupView
-import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_signup.*
 import java.util.*
+import javax.inject.Inject
 
-class SignupActivity : AppCompatActivity(), ISignupView {
+class SignupActivity : BaseActivity(), ISignupView {
 
-    val DEBOUNCE_DELAY: Long = 1500
-    val VERIFY_REQUEST_CODE: Int = 837 // 837 = verify
-    val PHONE_NUMBER_IS_VERIFIED_KEY: String = "phone_number_verified"
-    private val NEW_USERNAME_KEY = "new_username"
+    val DEBOUNCE_DELAY: Long = 500
 
+    @Inject
     lateinit var signupPresenter: ISignupPresenter.forView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup)
 
-        signupPresenter = SignupPresenter(this, applicationContext)
+        newUsernameDoneBtn.setOnClickListener {
+            signupPresenter.updateUsername(newUsernameEt.text.toString());
+        }
 
-        // TODO: Verify username with debouncing
+        var diComponent: SignupActivityComponent = DaggerSignupActivityComponent
+                .builder()
+                .appComponent((application as PickyApplication).getAppComponent())
+                .signupActivityModule(SignupActivityModule(this))
+                .build()
+        diComponent.injectSignupActivity(this)
+
+        signupPresenter.checkNewUsername(newUsernameEt.text.toString())
 
         newUsernameEt.addTextChangedListener(object : TextWatcher {
             private var debounceTimerNewUsernameEt: Timer = Timer()
@@ -42,11 +54,14 @@ class SignupActivity : AppCompatActivity(), ISignupView {
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
 
             override fun afterTextChanged(p0: Editable?) {
+                newUsernameDoneBtn.isEnabled = false
                 debounceTimerNewUsernameEt.cancel()
                 debounceTimerNewUsernameEt = Timer()
                 debounceTimerNewUsernameEt.schedule(object : TimerTask() {
                     override fun run() {
-                        signupPresenter.checkNewUsername(newUsernameEt.text.toString())
+                        diComponent.getThreadHandler().post {
+                            signupPresenter.checkNewUsername(newUsernameEt.text.toString())
+                        }
                     }
 
                 }, DEBOUNCE_DELAY)
@@ -55,45 +70,18 @@ class SignupActivity : AppCompatActivity(), ISignupView {
         })
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == VERIFY_REQUEST_CODE) {
-            if (resultCode == Activity.RESULT_OK) {
-                val isVerified: Boolean = data.getBooleanExtra(PHONE_NUMBER_IS_VERIFIED_KEY, false)
-                Toast.makeText(this, "Did user verify: " + isVerified.toString(), Toast.LENGTH_SHORT).show() // FIXME: remove Toast?
-                if (isVerified) {
-                    signupPresenter.registerUser()
-                }
-            } else if (resultCode == Activity.RESULT_CANCELED) {
-                Toast.makeText(this, "couldn't verify", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
     override fun onUsernameChecked(isOk: Boolean, message: String) {
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
+        if (isOk) {
+            newUsernameDoneBtn.isEnabled = true
+            return
+        }
+        newUsernameDoneBtn.isEnabled = false
     }
 
-    override fun onUserCreateAttempt(responseMessage: String) {
-        Toast.makeText(this, responseMessage, Toast.LENGTH_SHORT).show()
-    }
-
-    override fun onRegistrationFailed(message: String) {
-        Toast.makeText(applicationContext, message, Toast.LENGTH_SHORT).show()
-        setResult(Activity.RESULT_CANCELED)
+    override fun startMainActivity() {
+        startActivity(Intent(this, MainActivity::class.java))
+        overridePendingTransition(0, 0)
         finish()
     }
 
-    override fun onRegistrationSuccessful(username: String) {
-        val resultIntent: Intent = Intent()
-        resultIntent.putExtra(NEW_USERNAME_KEY, username)
-        setResult(Activity.RESULT_OK, resultIntent)
-        finish()
-    }
-
-    override fun onBackPressed() {
-        setResult(Activity.RESULT_CANCELED)
-        super.onBackPressed()
-        finish()
-    }
 }

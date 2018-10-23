@@ -5,11 +5,10 @@ package com.example.picky.picky.login.interfacing
  */
 interface ILoginPresenter {
     interface forView {
-        fun loginWith(username: String)
         fun authWithGoogle(idToken: String)
     }
 
     interface forModel {
-        fun loginResult(status: String, username: String)
+        fun loginResult(status: String)
     }
 }

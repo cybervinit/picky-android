@@ -6,15 +6,13 @@ package com.example.picky.picky.signup.interfacing
 interface ISignupPresenter {
 
     interface forView {
-        // TODO: add view methods
         fun checkNewUsername(newUsername: String)
-        fun checkUsernameValid(newUsername: String)
-        fun registerUser()
+        fun updateUsername(toString: String)
     }
 
     interface forModel {
-        // TODO: add model methods
-        fun onUserRegisterUpdate(message: String)
+        fun onUsernameValidUpdate(isValidStr: String)
+        fun onUsernameSetUpdate(string: String)
     }
 
 }

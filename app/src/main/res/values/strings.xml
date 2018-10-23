@@ -17,4 +17,5 @@
     <string name="picky_logo">Picky logo</string>
 
     <string name="google_oauth_client_id">409466924106-c443je9budd32ahm2a8e3n0adpq6927a.apps.googleusercontent.com</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

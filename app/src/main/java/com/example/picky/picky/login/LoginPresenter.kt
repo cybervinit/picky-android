@@ -1,28 +1,30 @@
 package com.example.picky.picky.login
 
 import android.content.Context
+import android.os.Handler
+import android.util.Log
+import com.example.picky.picky.helpers.PickyCookieJar
 import com.example.picky.picky.login.interfacing.ILoginModel
 import com.example.picky.picky.login.interfacing.ILoginPresenter
 import com.example.picky.picky.login.interfacing.ILoginView
+import com.franmontiel.persistentcookiejar.PersistentCookieJar
+import com.franmontiel.persistentcookiejar.cache.SetCookieCache
+import com.franmontiel.persistentcookiejar.persistence.SharedPrefsCookiePersistor
 import okhttp3.OkHttpClient
 import javax.inject.Inject
 
 class LoginPresenter @Inject constructor(
         loginView: ILoginView,
-        okHttpClient: OkHttpClient
+        okHttpClient: OkHttpClient,
+        pickyCookieJar: PickyCookieJar,
+        handler: Handler
 ) : ILoginPresenter.forModel, ILoginPresenter.forView {
 
     private var loginView: ILoginView = loginView
-    private var loginModel: ILoginModel = LoginModel(this, okHttpClient)
+    public var loginModel: ILoginModel = LoginModel(this, okHttpClient, pickyCookieJar, handler)
 
-    override fun loginWith(username: String) {
-        this.loginModel.loginWith(username)
-        // TODO: Hash the password?
-    }
-
-    override fun loginResult(status: String, username: String) {
-         this.loginView.loginResult(status, username)
-        // TODO: function invoked from the model
+    override fun loginResult(status: String) {
+         this.loginView.loginResult(status)
     }
 
     override fun authWithGoogle(idToken: String) {

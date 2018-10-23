@@ -5,11 +5,6 @@ package com.example.picky.picky.signup.interfacing
  */
 interface ISignupView {
     fun onUsernameChecked(isOk: Boolean, message: String)
-
-    // FIXME: Below method to be deleted
-    fun onUserCreateAttempt(responseMessage: String)
-
-    fun onRegistrationSuccessful(username: String)
-    fun onRegistrationFailed(message: String)
-
+    fun startMainActivity()
+    fun showToast(toastMessage: String)
 }

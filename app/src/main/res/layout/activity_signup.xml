@@ -65,6 +65,8 @@
         android:elevation="3dp"
         fancy:fb_defaultColor="@color/colorPrimary"
         fancy:fb_focusColor="@color/colorBlack"
+        fancy:fb_disabledColor="@color/colorDisabled"
+        fancy:fb_disabledTextColor="@color/colorDisabledText"
         fancy:fb_radius="5dp"
         fancy:fb_text="Done"
         fancy:fb_textColor="@color/colorWhite"
